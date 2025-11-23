@@ -1,6 +1,6 @@
 const fs = require('fs');
-
-
+const jwt = require("jsonwebtoken")
+const secretkey = "demo-token"
 const readData = async (req, res) => {
     try {
         const data = await fs.readFileSync("example.txt", "utf8");
@@ -59,9 +59,16 @@ const loginuser = async (req, res) => {
 
         if (existUser) {
             if (existUser.password == password) {
+
+                let token = jwt.sign({
+                    email
+                }, secretkey, {
+                    expiresIn: "1h"
+                })
                 return res.json({
                     isSuccess: true,
-                    message: "login successfully"
+                    message: "login successfully",
+                    token
                 })
             } else {
                 return res.json({ message: "password can not match" })
