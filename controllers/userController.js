@@ -22,6 +22,7 @@ const writeData = async (req, res) => {
     try {
 
         let obj = {
+            id: new Date().getTime(),
             email: req.body.email,
             password: req.body.password
         }
