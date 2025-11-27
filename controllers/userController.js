@@ -62,7 +62,7 @@ const loginuser = async (req, res) => {
             if (existUser.password == password) {
 
                 let token = jwt.sign({
-                    email
+                    id: existUser.id
                 }, secretkey, {
                     expiresIn: "1h"
                 })
